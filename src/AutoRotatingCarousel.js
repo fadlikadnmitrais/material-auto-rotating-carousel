@@ -157,7 +157,9 @@ class AutoRotatingCarousel extends Component {
       ModalProps,
       open,
       onClose,
-      onStart
+      onStart,
+      ofCaption,
+      slideCaption,
     } = this.props
     const landscape = mobile && landscapeProp
     const transitionDuration = { enter: duration.enteringScreen, exit: duration.leavingScreen }
@@ -225,6 +227,7 @@ class AutoRotatingCarousel extends Component {
                 </Button>}
                 {
                   hasMultipleChildren &&
+                  (ofCaption === '' && slideCaption === '') &&
                   <Dots
                     count={children.length}
                     index={modulo(this.state.slideIndex, children.length)}
@@ -234,6 +237,16 @@ class AutoRotatingCarousel extends Component {
                     })}
                     onDotClick={this.handleChange}
                   />
+                }
+                {
+                  hasMultipleChildren &&
+                  (ofCaption !== '' && slideCaption !== '') &&
+                  <div className={classNames(classes.dots, {
+                    [classes.dotsMobile]: mobile,
+                    [classes.dotsMobileLandscape]: landscape
+                  })}>
+                    {this.state.slideIndex} {ofCaption !== '' ? ofCaption : 'of'} {children.length} {slideCaption !== '' ? slideCaption : 'slide'}
+                  </div>
                 }
               </div>
             </div>
@@ -296,7 +309,11 @@ AutoRotatingCarousel.propTypes = {
   /** Controls whether the AutoRotatingCarousel is opened or not. */
   open: PropTypes.bool,
   /** If `true`, the left and right arrows are hidden in the desktop version. */
-  hideArrows: PropTypes.bool
+  hideArrows: PropTypes.bool,
+  /** caption 'of' in label below */
+  ofCaption: PropTypes.string,
+  /** caption 'slide' in label below */
+  slideCaption: PropTypes.string,
 }
 
 export default withStyles(styles)(AutoRotatingCarousel)
