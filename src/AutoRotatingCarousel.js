@@ -159,7 +159,7 @@ class AutoRotatingCarousel extends Component {
       onClose,
       onStart,
       ofCaption,
-      slideCaption,
+      slideCaption
     } = this.props
     const landscape = mobile && landscapeProp
     const transitionDuration = { enter: duration.enteringScreen, exit: duration.leavingScreen }
@@ -313,7 +313,7 @@ AutoRotatingCarousel.propTypes = {
   /** caption 'of' in label below */
   ofCaption: PropTypes.string,
   /** caption 'slide' in label below */
-  slideCaption: PropTypes.string,
+  slideCaption: PropTypes.string
 }
 
 export default withStyles(styles)(AutoRotatingCarousel)
